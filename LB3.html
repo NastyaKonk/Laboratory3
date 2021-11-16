@@ -1,0 +1,74 @@
+
+<!DOCTYPE HTML>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+        <title>Laboratory3</title>
+        <style type="text/css"> 
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background: rgb(243, 198, 229);
+            text-align: center;
+        }
+        </style>
+  <script>
+    function calcWorktime(obj) 
+    {
+      var dateNow = new Date();
+      var dateWorkBegin = new Date(document.getElementById("firstDate").value);
+      
+      var workTimeSec=(dateNow-dateWorkBegin)/1000;
+      var workTimeMin=workTimeSec/60;
+      var workTimeHour=workTimeMin/60;
+      var workTimeDay=workTimeHour/24;
+      var workTimeYear=workTimeDay/364;
+      var workTimeYear2=dateNow.getFullYear()-dateWorkBegin.getFullYear()-1;
+        
+      // Находим нужную таблицу
+      var tbody = document.getElementById('stazh').getElementsByTagName('tbody')[0];    
+      // Создаем строку таблицы и добавляем ее
+      var row = tbody.insertRow(0);
+      var td1=row.insertCell(0);  
+      var td2=row.insertCell(1); 
+      var td3=row.insertCell(2);
+      var td4=row.insertCell(3);
+      var td5=row.insertCell(4);   
+      // Наполняем ячейки
+      td1.innerHTML = `${workTimeSec} sec`;
+      td2.innerHTML = `${workTimeMin} min`;
+      td3.innerHTML = `${workTimeHour} hour(s)`;
+      td4.innerHTML = `${workTimeDay} day(s)`;
+      td5.innerHTML = `${workTimeYear2} year(s)`;
+    }
+</script>
+</head>
+<body>
+  <h1>Лабораторная №3. Вариант №8</h1>
+  <div> Задание: вычисление стажа работы, если в анкете приводятся данные: фамилия и дата приема на работу.</div>
+  <form name="formOut">
+    <br>
+    <table border="1">
+      <tr style="background-color: salmon;"><th>Фамилия:</th><th>Дата приема на работу:</th></tr>
+      <tr><td><input type="text" value="Lastname" name="FIO"></td><td><input type="text" id="firstDate" name="firstDate" value="01/01/2000"></td></tr>
+    </table>
+    <div style="position: relative; left: -600px; top: 10px"><input type="button" value="Вычислить стаж" onclick="calcWorktime(formOut)"></div>
+    <br>
+    <table border="1" id="stazh">
+      <thead>
+        <tr>
+          <th style="background-color: rgb(221, 136, 62)" colspan="5">Cредний стаж работы</th> 
+         </tr>
+         <tr>
+           <th style="background-color: sandybrown">В секундах</th>
+           <th style="background-color: sandybrown">В минутах</th>
+           <th style="background-color: sandybrown">В часах</th>
+           <th style="background-color: sandybrown">В днях</th>
+           <th style="background-color: sandybrown">В годах</th>
+         </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </form>
+</body>
+</html>
